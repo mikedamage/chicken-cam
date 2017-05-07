@@ -1,0 +1,8 @@
+{
+  "name": "chicken-cam",
+  "description": "24 hour live chickens",
+  "version": "0.1.0",
+  "author": "Mike Green <mike.is.green@gmail.com>",
+  "license": "MIT",
+  "dependencies": {}
+}
