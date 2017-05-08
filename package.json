@@ -13,6 +13,6 @@
     "yargs": "^8.0.1"
   },
   "bin": {
-    "video-source-stream": "bin/video-source-stream.js"
+    "cc-client": "bin/chicken-cam-client.js"
   }
 }
