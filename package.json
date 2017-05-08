@@ -4,5 +4,8 @@
   "version": "0.1.0",
   "author": "Mike Green <mike.is.green@gmail.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.4"
+  }
 }
