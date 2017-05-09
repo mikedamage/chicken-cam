@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chicken Cam</title>
+</head>
+<body>
+  <header>
+    <h1>Chicken Cam</h1>
+    <p class="subtitle">
+      All chickens, most of the time.
+    </p>
+  </header>
+  <main class="video-frame">
+    <video id="video-feed" autoplay></video>
+  </main>
+  <footer class="main-footer">
+    <p class="copyright">
+      by Mike Green
+    </p>
+    <p class="links">
+      <a href="https://github.com/mikedamage/chicken-cam">GitHub</a>
+    </p>
+  </footer>
+
+  <script src="/js/socket.io.js"></script>
+  <script>
+    (function() {
+      const connection = io();
+      const video = document.querySelector('#video-feed');
+      const videoFeed = new MediaSource();
+      const videoCodec = 'video/webm; codecs="vp8"';
+      video.src = URL.createObjectURL(videoFeed);
+
+      if (!MediaSource.isTypeSupported(videoCodec)) {
+        console.warn('Browser does not support video stream format');
+        return;
+      }
+
+      videoFeed.addEventListener('sourceopen', () => {
+        const sourceBuffer = videoFeed.addSourceBuffer(videoCodec);
+
+        connection.on('video', (data) => {
+          sourceBuffer.appendBuffer(data);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

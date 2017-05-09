@@ -59,7 +59,6 @@ const stream = new VideoStream({
 
 stream.on('connect', () => console.log('Connected to server'));
 stream.on('play', () => console.log('Pulling video from source device'));
-stream.on('buffer', (buffer) => console.log(`Sending buffer to server (${buffer.length})`));
 stream.on('error', (err) => console.error('Stream error: ', err));
 
 process.on('SIGINT', () => {
