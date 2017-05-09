@@ -5,6 +5,8 @@
   "author": "Mike Green <mike.is.green@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bunyan": "^1.8.10",
+    "bunyan-middleware": "^0.6.0",
     "express": "^4.15.2",
     "gstreamer-superficial": "0.0.3",
     "lodash": "^4.17.4",
@@ -15,5 +17,9 @@
   "bin": {
     "cc-video-feed": "bin/video-feed.js",
     "cc-broadcast": "bin/broadcast-server.js"
+  },
+  "devDependencies": {
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
