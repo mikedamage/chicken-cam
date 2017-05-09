@@ -14,7 +14,7 @@
     </p>
   </header>
   <main class="video-frame">
-    <video id="video-feed" autoplay></video>
+    <video id="video-feed"></video>
   </main>
   <footer class="main-footer">
     <p class="copyright">
@@ -27,24 +27,42 @@
 
   <script src="/js/socket.io.js"></script>
   <script>
+    /* eslint-disable no-console */
+    /* global io */
     (function() {
+      let buffer;
+      let initAppended = false;
       const connection = io();
       const video = document.querySelector('#video-feed');
       const videoFeed = new MediaSource();
       const videoCodec = 'video/webm; codecs="vp8"';
       video.src = URL.createObjectURL(videoFeed);
 
+      videoFeed.addEventListener('error', console.error);
+      videoFeed.addEventListener('sourceclose', console.info);
+
+      console.debug('MediaSource: %O', videoFeed);
+
       if (!MediaSource.isTypeSupported(videoCodec)) {
         console.warn('Browser does not support video stream format');
         return;
       }
 
-      videoFeed.addEventListener('sourceopen', () => {
-        const sourceBuffer = videoFeed.addSourceBuffer(videoCodec);
+      connection.on('initSegment', (initSegment) => {
+        console.debug('Initialization segment received: %O', initSegment);
 
-        connection.on('video', (data) => {
-          sourceBuffer.appendBuffer(data);
+        videoFeed.addEventListener('sourceopen', (evt) => {
+          console.info('Source Open: %O', evt);
+          buffer = videoFeed.addSourceBuffer(videoCodec);
+          buffer.addEventListener('error', console.error);
+          buffer.appendBuffer(initSegment);
+          initAppended = true;
         });
+      });
+
+      connection.on('data', (data) => {
+        if (!buffer || !initAppended || buffer.updating) return;
+        buffer.appendBuffer(data);
       });
     })();
   </script>
