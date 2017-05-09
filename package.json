@@ -4,19 +4,21 @@
   "version": "0.1.0",
   "author": "Mike Green <mike.is.green@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "cc-video-feed": "bin/video-feed.js",
+    "cc-broadcast": "bin/broadcast-server.js"
+  },
   "dependencies": {
     "bunyan": "^1.8.10",
     "bunyan-middleware": "^0.6.0",
     "express": "^4.15.2",
-    "gstreamer-superficial": "0.0.3",
     "lodash": "^4.17.4",
     "mime-types": "^2.1.15",
     "socket.io": "^1.7.4",
     "yargs": "^8.0.1"
   },
-  "bin": {
-    "cc-video-feed": "bin/video-feed.js",
-    "cc-broadcast": "bin/broadcast-server.js"
+  "optionalDependencies": {
+    "gstreamer-superficial": "0.0.3"
   },
   "devDependencies": {
     "webpack": "^2.5.1",
