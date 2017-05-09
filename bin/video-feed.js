@@ -42,6 +42,8 @@ const argv        = require('yargs')
   })
   .help('help')
   .alias('help', 'h')
+  .config('config')
+  .alias('config', 'c')
   .argv;
 
 const stream = new VideoStream({
