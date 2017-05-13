@@ -14,7 +14,7 @@ const VideoFeed = require('../lib/video-feed');
 const logger = bunyan.createLogger({ name: 'chickenCam' });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'app', 'public', 'index.html'));
 });
 
 app.get('/js/socket.io.js', (req, res) => {
