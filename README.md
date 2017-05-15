@@ -14,6 +14,14 @@ Aside from giving me a chance to learn more about full-stack live video streamin
 
 ## Setup
 
+### Package Dependencies
+
+You will need to install the GStreamer 1.0 development headers and default plugins on the machine you plan to use as the video source. The package names vary by distro, but on Ubuntu it's `libgstreamer1.0-dev`. You may also need to install additional audio/video encoding packages in order to get a WebM stream from a Video4Linux camera feed.
+
+The broadcast server doesn't need these packages, so you can install `chicken-cam` using the `--no-optional` flag on that machine to avoid build failures.
+
+### Installation
+
 ```sh
 # Run this on both the video source and the broadcast server:
 git clone https://github.com/mikedamage/chicken-cam.git
